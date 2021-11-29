@@ -1,0 +1,69 @@
+name: build
+
+# Controls when the action will run. 
+on: [push, workflow_dispatch]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  windows:
+    # The type of runner that the job will run on
+    runs-on: windows-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      
+      - name: Setup Python
+        uses: actions/setup-python@v2.2.2
+      
+      - name: Installing pyinstaller
+        run: pip3 install pyinstaller==4.2
+      
+      - name: Installing kivy-deps
+        run: pip3 install kivy-deps.sdl2 kivy-deps.glew
+
+      - name: Installing Kivy/MD
+        run: pip3 install kivy==2.0.0 kivymd==0.104.1
+        
+      - name: Building EXE
+        run: export KIVY_GL_BACKEND="angle_sdl2";
+             pyinstaller ./.github/windows.spec
+        shell: bash
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: Windows EXE
+          path: ./dist/Matrix Calculator.exe
+
+  linux:
+    runs-on: ubuntu-18.04
+
+    steps:
+
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.9.9'
+          architecture: 'x64'
+
+      - name: Installing Dependencies
+        run:  sudo add-apt-repository ppa:kivy-team/kivy;
+              sudo apt-get install -y libmtdev1;  
+      
+      - name: Installing pyinstaller
+        run: pip3 install pyinstaller==4.2
+
+      - name: Installing Kivy/MD
+        run: pip3 install kivy[full]==2.0.0 kivymd==0.104.1
+        
+      - name: Building EXE
+        uses: GabrielBB/xvfb-action@v1 # Virtual x11 server to run GUI
+        with:
+          run: pyinstaller ./.github/linux.spec --log-level DEBUG
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: Linux AppImage
+          path: ./dist/MatrixCalculator.AppImage
