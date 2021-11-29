@@ -234,7 +234,7 @@ class Validator:
             elif re.search(r"[\/](\+|\-)", value):
                 error = "! +/- bisa numerator, tidak denominator."
             elif re.match(r"^((\+|\-)?\d{1,3}([\.]\d)?[\/](\+|\-)?\d{1,3}([\.]\d)?)$", value):
-                error = "! desimal dan pecahan tidak bisa digabungkan."
+                error = "! Desimal dan pecahan tidak bisa digabungkan."
             elif re.search(r"\d{4,}", value):
                 error = "! Max. 3 digits untuk bagian numerik."
             else:
