@@ -4,10 +4,10 @@
 title = Kalkulator Matrix
 
 # (str) Package name
-package.name = kalkulatormatrix
+package.name = kalkumatrix
 
 # (str) Package domain (needed for android/ios packaging)
-package.domain = hardianekacahyadi.xirpl.smkn4srl
+package.domain = group.hardianeka
 
 # (str) Source code where the main.py live
 source.dir = .
@@ -22,7 +22,7 @@ source.include_exts = py,png,jpg,kv,atlas,ttf
 #source.exclude_exts = spec
 
 # (list) List of directory to exclude (let empty to not exclude anything)
-source.exclude_dirs = tests, bin, samples, Desktop, Mobile, .vscode, .idea, .buildozer
+source.exclude_dirs = bin, samples, .vscode, .buildozer
 
 # (list) List of exclusions using pattern matching
 #source.exclude_patterns = license,images/*/*.jpg
