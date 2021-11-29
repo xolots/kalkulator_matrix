@@ -4,10 +4,10 @@
 title = Kalkulator Matrix
 
 # (str) Package name
-package.name = kalkumatrix
+package.name = matrixcalc
 
 # (str) Package domain (needed for android/ios packaging)
-package.domain = group.hardianeka
+package.domain = group.dcindia
 
 # (str) Source code where the main.py live
 source.dir = .
